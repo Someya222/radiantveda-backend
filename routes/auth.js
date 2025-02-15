@@ -14,7 +14,7 @@ router.post('/signup', async (req, res) => {
     try {
         let user = await User.findOne({ email });
         if (user) {
-            return res.status(400).json({ message: 'User already exists' });
+            return res.status(400).json({ message: 'This email is already registered. Try logging in instead.' });
         }
 
         user = new User({ name, email, password });
@@ -36,12 +36,12 @@ router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Oops! Incorrect email or password. Please try again.' });
         }
 
         const isMatch = await user.matchPassword(password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Oops! Incorrect email or password. Please try again.' });
         }
 
         const token = jwt.sign({ user: { id: user.id } }, process.env.JWT_SECRET, {

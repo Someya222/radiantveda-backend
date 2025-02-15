@@ -19,12 +19,12 @@ router.post('/submit',authMiddleware, async (req, res) => {
             // Update existing questionnaire
             Object.assign(questionnaire, req.body);
             await questionnaire.save();
-            return res.status(200).json({ message: 'Questionnaire updated successfully', questionnaire });
+            return res.status(200).json({ message: 'Questionnaire updated successfully',status_code:1, questionnaire });
         } else {
             // Create new questionnaire
             questionnaire = new Questionnaire({ userId, ...req.body });
             await questionnaire.save();
-            return res.status(201).json({ message: 'Questionnaire created successfully', questionnaire });
+            return res.status(201).json({ message: 'Questionnaire created successfully',status_code:2, questionnaire });
         }
     } catch (error) {
         res.status(500).json({ message: 'Server error questionnaire', error: error.message });
