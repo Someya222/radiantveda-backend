@@ -15,7 +15,7 @@ const app = express();
 // Middleware
 // Middleware
 app.use(cors({
-  origin: 'https://radiantveda-backend-y0qp.onrender.com',
+  origin: 'https://radiantveda-frontend-ten.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
